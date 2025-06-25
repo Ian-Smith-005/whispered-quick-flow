@@ -1,0 +1,206 @@
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: #f8f9fa;
+      }
+      * {
+        font-family: "Nunito", sans-serif;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: #cbc5af;
+        border-right: 1px solid #dee2e6;
+        padding: 1.5rem 1rem;
+        z-index: 1030;
+        overflow-y: auto;
+      }
+
+      .sidebar .nav-link {
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #333;
+      }
+
+      .sidebar .nav-link.active {
+        background-color: #e9f7ef;
+        color: #20963b;
+        font-weight: 600;
+      }
+
+      /* Main content */
+      .main-content-wrapper {
+        margin-left: 250px;
+        padding: 2rem;
+      }
+
+      @media (max-width: 767.98px) {
+        .sidebar {
+          display: none;
+        }
+
+        .main-content-wrapper {
+          margin-left: 0;
+          padding-bottom: 4rem;
+        }
+      }
+
+      .content-section {
+        display: none;
+      }
+
+      .content-section.active {
+        display: block;
+      }
+
+      /* Bottom Nav */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        border-top: 1px solid #dee2e6;
+        z-index: 1030;
+      }
+
+      .bottom-nav .nav-link {
+        padding: 0.75rem 0;
+        font-size: 1.2rem;
+        color: #495057;
+      }
+
+      .bottom-nav .nav-link.active {
+        color: #20963b;
+      }
+
+      @media (min-width: 768px) {
+        .bottom-nav {
+          display: none;
+        }
+      }
+
+      /* Preloader Overlay */
+      .preloader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #fff8e1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.8s ease, visibility 0.8s ease;
+      }
+
+      .preloader-overlay.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      /* Ripple Loader */
+      .ripple-loader {
+        position: relative;
+        width: 150px;
+        height: 150px;
+      }
+
+      .ripple-loader .circle {
+        position: absolute;
+        border-radius: 50%;
+        background-color: #20963b;
+        opacity: 0.6;
+        animation: ripple 2s infinite;
+      }
+
+      .ripple-loader .circle:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+
+      .ripple-loader .circle:nth-child(3) {
+        animation-delay: 0.8s;
+      }
+
+      .ripple-loader .center-dot {
+        width: 30px;
+        height: 30px;
+        background-color: #20963b;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+      }
+
+      @keyframes ripple {
+        0% {
+          width: 0px;
+          height: 0px;
+          top: 50%;
+          left: 50%;
+          opacity: 0.7;
+        }
+        100% {
+          width: 150px;
+          height: 150px;
+          top: 0;
+          left: 0;
+          opacity: 0;
+        }
+      }
+
+
+      /*tab one dashboard*/
+      .add-meal-btn {
+        background-color: #fff;
+        color: #20963b;
+        border: 1px solid #20963b;
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+      }
+      .add-meal-btn:hover {
+        background-color: #20963b;
+        color: #fff;
+        border: #20963b;
+      }
+      .AI-analysis-btn {
+        background-color: #fff;
+        color: #20963b;
+        border: 1px solid #20963b;
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+      }
+      .AI-analysis-btn:hover {
+        background-color: #20963b;
+        color: #fff;
+        border: #20963b;
+      }
+      .tips-btn {
+        background-color: #fff;
+        color: #20963b;
+        border: 1px solid #20963b;
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+      }
+      .tips-btn:hover {
+        background-color: #20963b;
+        color: #fff;
+        border: #20963b;
+      } 

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script
+    src="https://kit.fontawesome.com/f3068f95b3.js"
+    crossorigin="anonymous"
+  ></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      font-family: "Nunito", sans-serif;
+    }
+    #chatForm {
+      height: 120px;
+      max-width: 600px;
+      border-radius: 10px;
+      background-color: #ced4da;
+      margin: 0 auto;
+      padding: 5px;
+      padding-right: 25px;
+      position: relative;
+    }
+    #chatInput {
+      height: 60px;
+      border-radius: 10px;
+      font-size: 16px;
+      position: relative;
+      border: 1px solid #ced4da;
+      width: 100%;
+      padding-left: 15px;
+      background: none;
+    }
+    #chatInput:focus {
+      outline: none;
+    }
+
+    .btn-success {
+      position: absolute;
+      font-size: 25px;
+      border: none;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      right: 10px;
+      top: 37px;
+      transform: translateY(-50%);
+      color: #0088ff;
+      cursor: pointer;
+      transition: all 0.6s ease;
+    }
+    .btn-success:hover {
+      background-color: #c7cdd2;
+      color: #0056b3;
+    }
+    .btn-success:active {
+      font-size: 13px;
+    }
+
+    .plus-btn {
+      position: absolute;
+      padding: 5px;
+      padding-top: 9px;
+      height: 27px;
+      width: 100px;
+      border: 1px solid black;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 10px;
+      text-align: center;
+      transition: all 0.6s ease;
+    }
+    .plus-btn:hover,
+    .voice-btn:hover {
+      background-color: #fff;
+      color: #000000;
+    }
+    .plus-btn:active,
+    .voice-btn {
+      transform: scale(0.9);
+    }
+
+    /* Upload menu */
+    .upload-menu,
+    .upload-menu.hidden-menu {
+      position: absolute;
+      bottom: 50px;
+      left: 10px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 1000;
+      width: 200px;
+    }
+
+    .upload-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .upload-menu-item {
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      color: #333;
+      background: white;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .upload-menu-item:hover {
+      background-color: #f5f5f5;
+    }
+    .voice-btn {
+      padding: 5px;
+      padding-top: 9px;
+      position: absolute;
+      right: 10px;
+      height: 27px;
+      width: 100px;
+      border: 1px solid black;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 10px;
+      text-align: center;
+      transition: all 0.6s ease;
+    }
+  </style>
+  <body>
+    <div class="chat-input-area">
+      <form id="chatForm">
+        <div class="input-group">
+          <input
+            type="text"
+            id="chatInput"
+            class="form-control ps-5"
+            placeholder="Type your message..."
+            autocomplete="off"
+          />
+          <button class="btn btn-success" type="submit">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+
+          <!-- Plus button -->
+          <div class="plus-btn" id="plusBtn">
+            <i class="fas fa-plus"></i> Attatch
+          </div>
+          <!--Voice icon-->
+          <div class="voice-btn">
+            <i class="fa-solid fa-microphone-lines"></i> Voice
+          </div>
+
+          <!-- Upload menu -->
+          <div class="upload-menu" id="uploadMenu">
+            <div class="upload-menu-item">
+              <i class="fas fa-camera"></i> Take a Photo
+            </div>
+            <div class="upload-menu-item">
+              <i class="fas fa-upload"></i> Upload a File
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+    const plusBtn = document.getElementById("plusBtn");
+    const uploadMenu = document.getElementById("uploadMenu");
+
+    // Toggle menu
+    function toggleMenu() {
+      uploadMenu.classList.remove("hidden-menu");
+      uploadMenu.classList.toggle("show");
+    }
+
+    // Hide menu
+    function hideMenu() {
+      uploadMenu.classList.remove("show");
+      uploadMenu.classList.add("hidden-menu");
+    }
+
+    plusBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent outside click from closing
+      toggleMenu();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!uploadMenu.contains(e.target) && !plusBtn.contains(e.target)) {
+        hideMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        hideMenu();
+      }
+    });
+  </script>
+</html>
