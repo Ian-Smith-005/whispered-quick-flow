@@ -1,8 +1,20 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/landing.css';
 
 const LandingPage = () => {
+  useEffect(() => {
+    // Load the landing animation script
+    const script = document.createElement('script');
+    script.src = '/assets/js/landing.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="container">
       <nav>
