@@ -1,6 +1,6 @@
 
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import React from '@vitejs/plugin-react'
 import path from 'path'
 import { componentTagger } from "lovable-tagger"
 import tailwindcss from '@tailwindcss/postcss'
@@ -8,7 +8,7 @@ import autoprefixer from 'autoprefixer'
 
 export default defineConfig({
   plugins: [
-    react(),
+    React(),
     componentTagger(),
   ],
   resolve: {
@@ -27,5 +27,7 @@ export default defineConfig({
   server: {
     port: 8080,
     host: true
-  }
+  },
+  // Serve static HTML files from public directory
+  publicDir: 'public',
 })
