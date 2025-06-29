@@ -1,5 +1,9 @@
 {
+  "scripts": {
+    "build:dev": "vite build --mode development"
+  },
   "dependencies": {
     "bootstrap": "^5.3.7"
   }
 }
+
