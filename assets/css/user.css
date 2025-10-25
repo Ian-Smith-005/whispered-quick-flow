@@ -1,48 +1,46 @@
-      :root {
-        --diacare-green: #cbc5af;
-      }
+:root {
+  --diacare-green: #cbc5af;
+}
 
-      body {
-        background-color: #f8f9fa;
-      }
+body {
+  background-color: #f8f9fa;
+}
 
- 
+.btn-diacare {
+  background-color: var(--diacare-green);
+  color: #fff;
+}
 
-      .btn-diacare {
-        background-color: var(--diacare-green);
-        color: #fff;
-      }
+.btn-diacare:hover {
+  background-color: #1a7d30;
+  color: #fff;
+}
+.fa-user {
+  font-size: 18px;
+}
+.user-section {
+  border: none;
+}
+canvas {
+  max-width: 100%;
+  height: auto;
+}
 
-      .btn-diacare:hover {
-        background-color: #1a7d30;
-        color: #fff;
-      }
-      .fa-user {
-        font-size: 18px;
-      }
-      .user-section {
-        border: none;
-      }
-      canvas {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .logout-btn-custom {
-        background-color: #6b6b6b;
-        color: #fff;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        cursor: pointer;
-        width: 250px;
-      } 
-      .delete-btn-custom {
-        background-color: #ff4d4d;
-        color: #fff;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        cursor: pointer;
-        width: 250px;
-      }
+.logout-btn-custom {
+  background-color: #6b6b6b;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 250px;
+}
+.delete-btn-custom {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 250px;
+}

@@ -1,0 +1,40 @@
+.section-title {
+  border-left: 4px solid #20963b;
+  padding-left: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.tip-card,
+.news-card {
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.tip-card:hover,
+.news-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tip-icon {
+  font-size: 1.5rem;
+  color: #20963b;
+  margin-right: 10px;
+  width: 30px;
+  text-align: center;
+}
+
+.news-thumbnail {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.badge-category {
+  background-color: #20963b;
+  font-size: 0.75rem;
+}

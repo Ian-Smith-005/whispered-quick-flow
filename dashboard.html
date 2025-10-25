@@ -36,9 +36,9 @@
     <link rel="stylesheet" href="assets/css/dashboard.css" />
     <link rel="stylesheet" href="assets/css/ai.css" />
     <link rel="stylesheet" href="assets/css/user.css" />
+    <link rel="stylesheet" href="assets/css/tips.css" />
   </head>
-  <!--account deletion modal -->
-  <!-- Delete Confirmation Modal -->
+
   <!-- Delete Confirmation Modal -->
   <div
     class="modal fade"
@@ -148,7 +148,7 @@
         <div class="container my-4">
           <!-- Row 1: Quick Stats -->
           <div class="row mb-4">
-            <div class="col-md-3">
+            <div class="col-md-3 quick-stats">
               <div class="card text-center shadow-sm">
                 <div class="card-body">
                   <h6 class="card-title">Current Glucose</h6>
@@ -157,7 +157,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 quick-stats">
               <div class="card text-center shadow-sm">
                 <div class="card-body">
                   <h6 class="card-title">Last Meal</h6>
@@ -166,7 +166,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 quick-stats">
               <div class="card text-center shadow-sm">
                 <div class="card-body">
                   <h6 class="card-title">Medication</h6>
@@ -175,7 +175,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 quick-stats">
               <div class="card text-center shadow-sm">
                 <div class="card-body">
                   <h6 class="card-title">Activity</h6>
@@ -446,8 +446,104 @@
       </div>
 
       <div id="mealplans" class="content-section">
-        <h2>Meal Plans</h2>
-        <p>AI-powered recommendations tailored to you.</p>
+        <div class="container">
+          <!-- Meal Entry Form -->
+          <h4 class="section-title">
+            <i class="fas fa-plus-circle me-2"></i>Log a Meal
+          </h4>
+          <div class="card shadow-sm mb-5">
+            <div class="card-body">
+              <form id="mealForm">
+                <div class="row g-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Meal Time</label>
+                    <select class="form-select" id="mealTime" required>
+                      <option disabled selected>Select</option>
+                      <option>Breakfast</option>
+                      <option>Lunch</option>
+                      <option>Dinner</option>
+                      <option>Snack</option>
+                    </select>
+                  </div>
+                  <div class="col-md-5">
+                    <label class="form-label">Meal Description</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="mealDesc"
+                      placeholder="e.g. Brown rice & grilled chicken"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Calories</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="mealCalories"
+                      placeholder="e.g. 350"
+                    />
+                  </div>
+                  <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-success w-100">
+                      <i class="fas fa-check"></i> Add
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Meal History -->
+          <h4 class="section-title">
+            <i class="fas fa-history me-2"></i>Today's Tracked Meals
+          </h4>
+          <div class="card shadow-sm mb-5">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover" id="mealTable">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Description</th>
+                      <th>Calories</th>
+                      <th>Health Analysis</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Meal rows will go here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tips Section -->
+          <h4 class="section-title">
+            <i class="fas fa-lightbulb me-2"></i>Quick Tips
+          </h4>
+          <div class="row g-3 mb-5">
+            <div class="col-md-4">
+              <div class="alert alert-success">
+                <i class="fas fa-apple-alt me-2"></i> Eat whole fruits over
+                juice.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="alert alert-info">
+                <i class="fas fa-balance-scale me-2"></i> Pair carbs with
+                protein to stabilize glucose.
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="alert alert-warning">
+                <i class="fas fa-bread-slice me-2"></i> Watch out for white
+                bread & refined starches.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!--Artificial Intelligence page-->
@@ -517,12 +613,138 @@
       <!--Artificial Intelligence page-->
 
       <div id="tips" class="content-section">
-        <h2>Health Tips</h2>
-        <ul>
-          <li>Stay hydrated</li>
-          <li>Monitor carb intake</li>
-          <li>Exercise regularly</li>
-        </ul>
+        <div class="container">
+          <h4 class="section-title">
+            <i class="fas fa-heartbeat me-2"></i>Healthy Living Tips
+          </h4>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card tip-card p-3">
+                <div class="d-flex align-items-start">
+                  <div class="tip-icon"><i class="fas fa-seedling"></i></div>
+                  <div>
+                    <h6>Choose Low-GI Foods</h6>
+                    <p class="text-muted">
+                      Swap high-GI foods like white rice for whole grains to
+                      maintain steady blood sugar levels.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card tip-card p-3">
+                <div class="d-flex align-items-start">
+                  <div class="tip-icon"><i class="fas fa-walking"></i></div>
+                  <div>
+                    <h6>Stay Active</h6>
+                    <p class="text-muted">
+                      Aim for at least 30 minutes of brisk walking daily to
+                      boost insulin sensitivity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card tip-card p-3">
+                <div class="d-flex align-items-start">
+                  <div class="tip-icon"><i class="fas fa-spa"></i></div>
+                  <div>
+                    <h6>Manage Stress</h6>
+                    <p class="text-muted">
+                      Incorporate meditation, deep breathing, or yoga to reduce
+                      cortisol and improve glucose control.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card tip-card p-3">
+                <div class="d-flex align-items-start">
+                  <div class="tip-icon"><i class="fas fa-bed"></i></div>
+                  <div>
+                    <h6>Prioritize Sleep</h6>
+                    <p class="text-muted">
+                      Aim for 7–9 hours of quality sleep to keep hormones in
+                      balance and aid recovery.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card tip-card p-3">
+                <div class="d-flex align-items-start">
+                  <div class="tip-icon"><i class="fas fa-tint"></i></div>
+                  <div>
+                    <h6>Hydrate Often</h6>
+                    <p class="text-muted">
+                      Staying hydrated helps the kidneys flush excess sugar
+                      through urine.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- News Section -->
+          <h4 class="section-title mt-5">
+            <i class="fas fa-newspaper me-2"></i>Latest News & Articles
+          </h4>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card news-card p-3">
+                <img
+                  src="https://cdn.pixabay.com/photo/2018/11/11/19/19/fruit-3809497_960_720.jpg"
+                  class="news-thumbnail"
+                  alt="news"
+                />
+                <span class="badge badge-category mb-2">Nutrition</span>
+                <h6>5 New Superfoods That Help Stabilize Blood Sugar</h6>
+                <p class="text-muted small">
+                  Researchers reveal how berries, flaxseed, and more can support
+                  diabetic health.
+                </p>
+                <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card news-card p-3">
+                <img
+                  src="https://cdn.pixabay.com/photo/2021/03/27/10/43/yoga-6128116_1280.jpg"
+                  class="news-thumbnail"
+                  alt="news"
+                />
+                <span class="badge badge-category mb-2">Exercise</span>
+                <h6>Best Workouts for Type 2 Diabetes</h6>
+                <p class="text-muted small">
+                  From resistance training to yoga – which exercise helps the
+                  most?
+                </p>
+                <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="card news-card p-3">
+                <img
+                  src="https://cdn.pixabay.com/photo/2020/04/13/11/20/medicine-5037941_1280.jpg"
+                  class="news-thumbnail"
+                  alt="news"
+                />
+                <span class="badge badge-category mb-2">AI & Health</span>
+                <h6>How AI Is Changing Diabetes Management</h6>
+                <p class="text-muted small">
+                  AI-powered assistants like Diacare are enabling better meal
+                  planning and prediction.
+                </p>
+                <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="profile" class="content-section">

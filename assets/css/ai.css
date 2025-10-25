@@ -45,12 +45,12 @@ body {
 }
 
 .chat-message.user {
-  background-color: #ced4da;
+  background-color: #5ec0b0;
   align-self: end;
 }
 
 .chat-message.bot {
-  background-color: #57c6bb;
+  background-color: #20963b;
   align-self: start;
 }
 * {

@@ -1,14 +1,196 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diacare | Diabetes Care Management</title>
+    <title>Diacare | Welcome</title>
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Remix Icons (only include once) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!--favicon-->
+    <link
+      rel="shortcut icon"
+      href="assets/img/logo_&_favicon/logo_diacare.png"
+      type="image/x-icon"
+    />
+
+    <!-- Animate.css -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="assets/css/landing.css" />
+    <link rel="stylesheet" href="assets/css/landing_footer.css" />
+    <link rel="stylesheet" href="assets/css/bubble__bg.css" />
+    <link rel="stylesheet" href="assets/css/preloader.css" />
   </head>
+
+  <!--mandatory css that for some reason sijui but inawork when in the file not external-->
+  <style>
+    .btn {
+      padding: 1rem 2rem;
+      outline: none;
+      border: none;
+      font-size: 1rem;
+      color: var(--white);
+      background-color: var(--primary-color);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    body {
+      background-color: var(--cream);
+    }
+
+    :root {
+      --primary-color: #28bf96;
+      --primary-color-dark: #209677;
+      --text-dark: #111827;
+      --text-light: #6b7280;
+      --white: #ffffff;
+      --cream: #fffdd0;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+  <!--mandatory css that for some reason sijui but inawork when in the file not external-->
+
+  <!--preloader--->
+  <div class="preloader-overlay" id="preloader">
+    <div class="ripple-loader">
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <div class="center-dot"></div>
+    </div>
+  </div>
+  <!--preloader--->
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!--bubble__bg-->
+    <div class="bubble-container" id="bubbleContainer"></div>
+    <!--bubble__bg-->
+
+    <div class="container">
+      <nav>
+        <div class="nav__logo">Diacare</div>
+        <ul class="nav__links">
+          <li class="link"><a href="#">Home</a></li>
+          <li class="link"><a href="#">About Us</a></li>
+          <li class="link"><a href="#">AI services</a></li>
+          <li class="link"><a href="#">Contact Us</a></li>
+        </ul>
+        <button class="btn">
+          <a href="register.html">Register For Free</a>
+        </button>
+      </nav>
+      <header class="header">
+        <div class="content" style="text-align: left">
+          <h1><span>Get Quick</span><br />Expert Services</h1>
+          <br />
+          <p>
+            Welcome to Diacare Diacare helps people with Type I and Type II
+            diabetes make smarter food choices using AI. Snap a photo of your
+            meal, and Diacare analyzes it instantly — offering dietary insights
+            tailored to your condition. Simple, fast, and focused on your
+            health. Take control of your meals. Live smarter with Diacare.
+          </p>
+          <br />
+          <button class="btn">
+            <a href="login.html"> Get a feel of it</a>
+          </button>
+        </div>
+        <div class="image">
+          <span class="image__bg"></span>
+          <img src="assets/img/header-bg.png" alt="header image" />
+          <div class="image__content image__content__1">
+            <span><i class="ri-user-3-line"></i></span>
+            <div class="details">
+              <h4 id="diacare-count">1520+</h4>
+              <p>Active Clients</p>
+            </div>
+          </div>
+          <div class="image__content image__content__2">
+            <ul>
+              <li>
+                <span><i class="ri-check-line"></i></span>
+                Real-time AI analysis
+              </li>
+              <li>
+                <span><i class="ri-check-line"></i></span>
+                Expert Feedback
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    </div>
+    <!--Footer-->
+    <footer class="footer animate__animated animate__fadeIn">
+      <div class="container__footer">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>About Us</h5>
+            <p>
+              Diacare is dedicated to providing quick and reliable medical
+              services. Our team of expert doctors and staff are committed to
+              ensuring your health and well-being.
+            </p>
+            <p>Email: info@diacare.com</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Services</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">Emergency Care</a></li>
+              <li><a href="#">General Checkups</a></li>
+              <li><a href="#">Specialist Consultations</a></li>
+              <li><a href="#">Telemedicine</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact</h5>
+            <p>Phone: +1-800-DIACARE</p>
+            <p>Address: 123 Health St, Wellness City</p>
+            <div class="footer-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Diacare. All rights reserved.</p>
+      </div>
+    </footer>
+    <!--footer-->
   </body>
+
+  <!--script links-->
+  <script src="assets/js/landing.js"></script>
+  <script src="assets/js/bubble__bg.js"></script>
+  <script src="assets/js/preloader.js"></script>
+  <!--script links-->
 </html>
