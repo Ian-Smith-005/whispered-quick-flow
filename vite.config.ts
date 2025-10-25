@@ -5,7 +5,7 @@ export default defineConfig({
   base: './', // ensure relative paths work after build
   root: '.',
   server: {
-    port: 5173,
+    port: 8080,
     open: false,
   },
   preview: {
