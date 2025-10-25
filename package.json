@@ -2,5 +2,11 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.76.1",
     "bootstrap": "^5.3.7"
+  },
+  "scripts": {
+    "build:dev": "vite build --mode development",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }
