@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diacare | AI Services</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover Diacare's AI-powered services: instant meal analysis, personalized dietary insights, glucose tracking, and smart meal planning for diabetes management." />
+    <meta name="keywords" content="AI meal analysis, diabetes tracking, smart nutrition, personalized meal plans, glucose monitoring" />
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Remix Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/f3068f95b3.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--favicon-->
+    <link
+      rel="shortcut icon"
+      href="assets/img/logo_&_favicon/logo_diacare.png"
+      type="image/x-icon"
+    />
+
+    <!-- Animate.css -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="assets/css/landing.css" />
+    <link rel="stylesheet" href="assets/css/landing_footer.css" />
+    <link rel="stylesheet" href="assets/css/bubble__bg.css" />
+    <link rel="stylesheet" href="assets/css/preloader.css" />
+
+    <style>
+      .btn {
+        padding: 1rem 2rem;
+        outline: none;
+        border: none;
+        font-size: 1rem;
+        color: var(--white);
+        background-color: var(--primary-color);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      body {
+        background-color: var(--cream);
+      }
+      :root {
+        --primary-color: #28bf96;
+        --primary-color-dark: #209677;
+        --text-dark: #111827;
+        --text-light: #6b7280;
+        --white: #ffffff;
+        --cream: #fffdd0;
+      }
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      .services-section {
+        padding: 4rem 0;
+      }
+      .service-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+      }
+      .service-icon {
+        font-size: 4rem;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+      }
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+      .feature-list li {
+        padding: 0.75rem 0;
+        color: var(--text-dark);
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .feature-list li:last-child {
+        border-bottom: none;
+      }
+      .feature-list i {
+        color: var(--primary-color);
+        margin-right: 10px;
+      }
+      .cta-section {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+        border-radius: 15px;
+        padding: 3rem;
+        text-align: center;
+        color: white;
+        margin: 3rem 0;
+      }
+    </style>
+  </head>
+
+  <!--preloader-->
+  <div class="preloader-overlay" id="preloader">
+    <div class="ripple-loader">
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <div class="center-dot"></div>
+    </div>
+  </div>
+
+  <body>
+    <!--bubble bg-->
+    <div class="bubble-container" id="bubbleContainer"></div>
+
+    <div class="container">
+      <nav>
+        <div class="nav__logo">Diacare</div>
+        <ul class="nav__links">
+          <li class="link"><a href="index.html">Home</a></li>
+          <li class="link"><a href="about-us.html">About Us</a></li>
+          <li class="link"><a href="ai-services.html">AI services</a></li>
+          <li class="link"><a href="contact-us.html">Contact Us</a></li>
+        </ul>
+        <button class="btn">
+          <a href="register.html">Register For Free</a>
+        </button>
+      </nav>
+
+      <section class="services-section">
+        <div class="text-center mb-5 animate__animated animate__fadeIn">
+          <h1 class="display-4 fw-bold" style="color: var(--text-dark)">AI-Powered Services</h1>
+          <p class="lead" style="color: var(--text-light)">
+            Advanced technology for smarter diabetes management
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="service-card animate__animated animate__fadeInUp">
+              <div class="text-center">
+                <i class="ri-camera-3-line service-icon"></i>
+                <h2 style="color: var(--text-dark)">Instant Meal Analysis</h2>
+              </div>
+              <p style="color: var(--text-light); font-size: 1.1rem; margin: 1.5rem 0">
+                Simply snap a photo of your meal and let our AI do the rest. Our advanced image recognition technology instantly identifies foods and provides detailed nutritional analysis.
+              </p>
+              <ul class="feature-list">
+                <li><i class="ri-check-double-line"></i> Real-time food recognition</li>
+                <li><i class="ri-check-double-line"></i> Nutritional breakdown (carbs, proteins, fats)</li>
+                <li><i class="ri-check-double-line"></i> Glycemic index calculation</li>
+                <li><i class="ri-check-double-line"></i> Portion size estimation</li>
+                <li><i class="ri-check-double-line"></i> Blood sugar impact prediction</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="service-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+              <div class="text-center">
+                <i class="ri-bar-chart-box-line service-icon"></i>
+                <h2 style="color: var(--text-dark)">Glucose Tracking</h2>
+              </div>
+              <p style="color: var(--text-light); font-size: 1.1rem; margin: 1.5rem 0">
+                Monitor your blood glucose levels and understand how different foods affect your body. Our AI identifies patterns and provides actionable insights.
+              </p>
+              <ul class="feature-list">
+                <li><i class="ri-check-double-line"></i> Visual glucose trend charts</li>
+                <li><i class="ri-check-double-line"></i> Meal-to-glucose correlation</li>
+                <li><i class="ri-check-double-line"></i> Pattern recognition and alerts</li>
+                <li><i class="ri-check-double-line"></i> Weekly and monthly reports</li>
+                <li><i class="ri-check-double-line"></i> Goal tracking and progress</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="service-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+              <div class="text-center">
+                <i class="ri-restaurant-2-line service-icon"></i>
+                <h2 style="color: var(--text-dark)">Smart Meal Planning</h2>
+              </div>
+              <p style="color: var(--text-light); font-size: 1.1rem; margin: 1.5rem 0">
+                Get personalized meal plans tailored to your diabetes type, preferences, and lifestyle. Our AI learns from your eating habits to provide better recommendations.
+              </p>
+              <ul class="feature-list">
+                <li><i class="ri-check-double-line"></i> Personalized meal suggestions</li>
+                <li><i class="ri-check-double-line"></i> Low glycemic index recipes</li>
+                <li><i class="ri-check-double-line"></i> Balanced macronutrient planning</li>
+                <li><i class="ri-check-double-line"></i> Shopping list generation</li>
+                <li><i class="ri-check-double-line"></i> Dietary restriction support</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="service-card animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+              <div class="text-center">
+                <i class="ri-lightbulb-flash-line service-icon"></i>
+                <h2 style="color: var(--text-dark)">Personalized Insights</h2>
+              </div>
+              <p style="color: var(--text-light); font-size: 1.1rem; margin: 1.5rem 0">
+                Receive tailored recommendations based on your unique health profile. Our AI adapts to your specific needs and continuously improves its suggestions.
+              </p>
+              <ul class="feature-list">
+                <li><i class="ri-check-double-line"></i> Custom dietary recommendations</li>
+                <li><i class="ri-check-double-line"></i> Food alternatives for better control</li>
+                <li><i class="ri-check-double-line"></i> Timing and portion guidance</li>
+                <li><i class="ri-check-double-line"></i> Exercise and meal coordination</li>
+                <li><i class="ri-check-double-line"></i> Medication timing reminders</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="service-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+              <div class="text-center">
+                <i class="ri-question-answer-line service-icon"></i>
+                <h2 style="color: var(--text-dark)">AI Chat Assistant</h2>
+              </div>
+              <p style="color: var(--text-light); font-size: 1.1rem; margin: 1.5rem 0">
+                Get instant answers to your diabetes and nutrition questions. Our AI assistant is available 24/7 to provide expert guidance and support.
+              </p>
+              <ul class="feature-list">
+                <li><i class="ri-check-double-line"></i> 24/7 availability</li>
+                <li><i class="ri-check-double-line"></i> Natural language understanding</li>
+                <li><i class="ri-check-double-line"></i> Evidence-based responses</li>
+                <li><i class="ri-check-double-line"></i> Personalized to your health profile</li>
+                <li><i class="ri-check-double-line"></i> Quick food and recipe lookups</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="service-card animate__animated animate__fadeInUp" style="animation-delay: 0.5s">
+              <div class="text-center">
+                <i class="ri-file-chart-line service-icon"></i>
+                <h2 style="color: var(--text-dark)">Health Reports</h2>
+              </div>
+              <p style="color: var(--text-light); font-size: 1.1rem; margin: 1.5rem 0">
+                Generate comprehensive health reports to share with your healthcare team. Track your progress and identify areas for improvement.
+              </p>
+              <ul class="feature-list">
+                <li><i class="ri-check-double-line"></i> Weekly and monthly summaries</li>
+                <li><i class="ri-check-double-line"></i> Exportable PDF reports</li>
+                <li><i class="ri-check-double-line"></i> Glucose control metrics</li>
+                <li><i class="ri-check-double-line"></i> Meal quality scores</li>
+                <li><i class="ri-check-double-line"></i> Healthcare provider sharing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section animate__animated animate__fadeInUp">
+          <h2 class="mb-3">Ready to Experience AI-Powered Diabetes Management?</h2>
+          <p class="lead mb-4">
+            Join over 1,520 users who are taking control of their health with Diacare
+          </p>
+          <button class="btn" style="background-color: white;">
+            <a href="register.html" style="color: var(--primary-color);">Start Your Free Trial</a>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!--Footer-->
+    <footer class="footer animate__animated animate__fadeIn">
+      <div class="container__footer">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>About Us</h5>
+            <p>
+              Diacare is dedicated to providing quick and reliable medical
+              services. Our team of expert doctors and staff are committed to
+              ensuring your health and well-being.
+            </p>
+            <p>Email: info@diacare.com</p>
+          </div>
+          <div class="col-md-4">
+            <h5>Services</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">AI Meal Analysis</a></li>
+              <li><a href="#">Dietary Insights</a></li>
+              <li><a href="#">Glucose Tracking</a></li>
+              <li><a href="#">Personalized Plans</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contact</h5>
+            <p>Phone: +1-800-DIACARE</p>
+            <p>Address: 123 Health St, Wellness City</p>
+            <div class="footer-form">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Diacare. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!--Scripts-->
+    <script src="assets/js/landing.js"></script>
+    <script src="assets/js/bubble__bg.js"></script>
+    <script src="assets/js/preloader.js"></script>
+  </body>
+</html>
