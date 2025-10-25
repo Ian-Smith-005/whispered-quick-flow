@@ -26,11 +26,11 @@
       .login-wrapper {
           display: flex;
           width: 100%;
-          max-width: 900px;
-          height: 50vh;
+          max-width: 1000px;
+          min-height: 600px;
           background: var(--white);
-          border-radius: 15px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
           overflow: hidden;
           z-index: 9;
           animate__animated animate__fadeIn;
@@ -40,7 +40,7 @@
           flex: 1;
           background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
           color: var(--white);
-          padding: 2rem;
+          padding: 3rem;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -48,63 +48,90 @@
       }
 
       .welcome-section h1 {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
+          font-size: 2.8rem;
+          margin-bottom: 1.5rem;
+          line-height: 1.2;
+          font-weight: 700;
       }
 
       .welcome-section p {
-          font-size: 1rem;
-          max-width: 300px;
+          font-size: 1.1rem;
+          line-height: 1.6;
+          max-width: 350px;
       }
 
       .circle {
           position: absolute;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(10px);
       }
 
-      .circle-1 { width: 200px; height: 200px; top: -100px; left: -100px; }
-      .circle-2 { width: 150px; height: 150px; bottom: -75px; right: -75px; }
+      .circle-1 { width: 250px; height: 250px; top: -100px; left: -100px; }
+      .circle-2 { width: 180px; height: 180px; bottom: -80px; right: -80px; }
 
       .form-section {
-          flex: 1;
-          padding: 2rem;
+          flex: 1.2;
+          padding: 3rem;
           display: flex;
           flex-direction: column;
           justify-content: center;
           text-align: center;
+          background: var(--white);
       }
 
       .form-section h2 {
           color: var(--text-dark);
-          margin-bottom: 1.5rem;
+          margin-bottom: 2rem;
+          font-size: 2rem;
+          font-weight: 600;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
       }
 
       .form-group label {
           color: var(--text-dark);
           display: block;
-          margin-bottom: 0.25rem;
-          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+          font-size: 0.95rem;
+          font-weight: 500;
           text-align: left;
       }
 
       .form-group input {
           width: 100%;
-          padding: 0.75rem;
-          border: 1px solid #ced4da;
-          border-radius: 5px;
-          margin-bottom: 1rem;
+          padding: 0.9rem 1rem;
+          border: 2px solid #e5e7eb;
+          border-radius: 8px;
+          font-size: 1rem;
           box-sizing: border-box;
+          transition: all 0.3s ease;
+          background: #fafafa;
+      }
+
+      .form-group input:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: var(--white);
+          box-shadow: 0 0 0 3px rgba(40, 191, 150, 0.1);
+      }
+
+      .form-group input::placeholder {
+          color: #9ca3af;
       }
 
       .form-check {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 1rem;
+          align-items: center;
+          margin-bottom: 1.5rem;
       }
 
       .form-check label {
-          color: var(--text-light);
+          color: var(--text-dark);
           margin-left: 0.5rem;
           font-size: 0.9rem;
       }
@@ -112,20 +139,31 @@
       .btn-primary {
           background-color: var(--primary-color);
           border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 5px;
+          padding: 1rem 1.5rem;
+          border-radius: 8px;
           color: var(--white);
           width: 100%;
-          transition: background-color 0.3s;
+          font-size: 1.05rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          cursor: pointer;
       }
 
       .btn-primary:hover {
           background-color: var(--primary-color-dark);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(40, 191, 150, 0.3);
+      }
+
+      .btn-primary:disabled {
+          background-color: #9ca3af;
+          cursor: not-allowed;
+          transform: none;
       }
 
       .btn-outline-primary {
           color: var(--primary-color);
-          border-color: var(--primary-color);
+          border: 2px solid var(--primary-color);
           width: 100%;
           margin-bottom: 1rem;
       }
@@ -136,25 +174,48 @@
       }
 
       .forgot-password, .signup-link {
-          color: var(--text-light);
+          color: var(--primary-color);
           text-decoration: none;
           font-size: 0.9rem;
+          font-weight: 500;
+          transition: color 0.3s ease;
       }
 
       .forgot-password:hover, .signup-link:hover {
-          color: var(--primary-color);
+          color: var(--primary-color-dark);
+          text-decoration: underline;
       }
 
       .other-login {
           text-align: center;
           color: var(--text-light);
-          margin: 1rem 0;
+          margin: 1.5rem 0;
+          font-size: 0.9rem;
+      }
+
+      .error-message, .success-message {
+          margin-top: 1rem;
+          padding: 0.75rem;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          animation: fadeIn 0.3s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @media (max-width: 768px) {
           .login-wrapper {
               flex-direction: column;
-              height: auto;
+              min-height: auto;
               max-width: 100%;
               border-radius: 0;
           }
@@ -162,44 +223,55 @@
           .welcome-section, .form-section {
               flex: none;
               width: 100%;
-              height: 50vh;
-              padding: 1.5rem;
+              min-height: 45vh;
+              padding: 2rem;
           }
 
           .welcome-section h1 {
-              font-size: 1.8rem;
+              font-size: 2rem;
           }
 
           .welcome-section p {
-              font-size: 0.9rem;
+              font-size: 0.95rem;
           }
 
-          .circle-1 { width: 100px; height: 100px; top: -50px; left: -50px; }
-          .circle-2 { width: 75px; height: 75px; bottom: -37.5px; right: -37.5px; }
+          .circle-1 { width: 120px; height: 120px; top: -60px; left: -60px; }
+          .circle-2 { width: 90px; height: 90px; bottom: -45px; right: -45px; }
       }
 
 
-      .form-group {
-        position: relative;
-      }
       #eye-checker {
         position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
+        right: 15px;
+        top: 42px;
         cursor: pointer;
+        color: var(--text-light);
+        transition: color 0.3s ease;
       }
+      
+      #eye-checker:hover {
+        color: var(--primary-color);
+      }
+      
       .fa-arrow-left {
         position: absolute;
-        top: 20px;
+        top: 25px;
         cursor: pointer;
         z-index: 1;
-        border: 1px solid white;
-        padding: 10px;
+        border: 2px solid white;
+        padding: 12px;
         border-radius: 50%;
+        transition: all 0.3s ease;
       }
+      
       .fa-arrow-left:hover {
         color: var(--primary-color);
         background-color: white;
-        transition: all 0.3s ease;
+        transform: scale(1.1);
+      }
+      
+      .spinner-border-sm {
+        width: 1rem;
+        height: 1rem;
+        border-width: 0.15em;
       }

@@ -37,6 +37,9 @@
     <link rel="stylesheet" href="assets/css/ai.css" />
     <link rel="stylesheet" href="assets/css/user.css" />
     <link rel="stylesheet" href="assets/css/tips.css" />
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
 
   <!-- Delete Confirmation Modal -->
@@ -119,6 +122,10 @@
         >
         <a href="#" class="nav-link" data-target="profile"
           ><i class="fa-regular fa-user"></i> Profile</a
+        >
+        <hr style="border-color: rgba(255,255,255,0.2); margin: 1rem 0;">
+        <a href="#" class="nav-link text-danger" data-logout
+          ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
         >
       </nav>
     </div>
@@ -759,10 +766,12 @@
               <div class="card shadow-sm">
                 <div class="card-body">
                   <h5 class="card-title">User Profile</h5>
-                  <p><strong>Name:</strong> Jane Doe</p>
-                  <p><strong>Condition:</strong> Type 2 Diabetes</p>
-                  <p><strong>Diagnosed:</strong> Jan 2021</p>
-                  <p><strong>Age:</strong> 45</p>
+                  <p><strong>Name:</strong> <span id="userName">Loading...</span></p>
+                  <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+                  <p><strong>Member Since:</strong> <span id="memberSince">2025</span></p>
+                  <button class="btn btn-danger btn-sm mt-3 w-100" data-logout>
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+                  </button>
                 </div>
               </div>
             </div>
@@ -906,17 +915,17 @@
               Delete Account
             </button>
 
-            <a href="index.html"
-              ><button class="btn btn-secondary logout-btn-custom">
-                Logout
-              </button></a
-            >
+            <button class="btn btn-secondary logout-btn-custom" data-logout>
+              <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- JS -->
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/session-check.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/ai.js"></script>
     <script src="assets/js/account_deletion.js"></script>

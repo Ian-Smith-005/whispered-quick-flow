@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diacare | Signup</title>
+    <title>Diacare | Sign Up</title>
 
     <!-- Preconnect for fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,6 +49,9 @@
       src="https://kit.fontawesome.com/f3068f95b3.js"
       crossorigin="anonymous"
     ></script>
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
   <body>
     <!--bubble__bg-->
@@ -84,23 +87,23 @@
         <div class="circle circle-2"></div>
       </div>
       <div class="form-section">
-        <form id="loginForm" action="dashboard.html" class="w-100" novalidate>
-          <h2>Sign in</h2>
+        <form id="registerForm" class="w-100" novalidate>
+          <h2>Sign Up</h2>
           <div class="form-group">
-            <label for="username">First Name</label>
-            <input type="text" id="username" name="username" required />
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="John" required />
           </div>
           <div class="form-group">
-            <label for="username">Last Name</label>
-            <input type="text" id="username" name="username" required />
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Doe" required />
           </div>
           <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required />
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required />
             <i
               id="eye-checker"
               class="fa-solid fa-eye"
@@ -112,7 +115,7 @@
           <div class="other-login">or</div>
           <div class="mt-2">
             <a href="login.html" class="signup-link">
-              Already a user?, get back in
+              Already a user? Sign In
             </a>
           </div>
         </form>
@@ -123,6 +126,14 @@
     <script src="assets/js/bubble__bg.js"></script>
     <script src="assets/js/form__passcode__toggler.js"></script>
     <script src="assets/js/preloader.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+      // Check if already authenticated
+      redirectIfAuthenticated();
+      
+      // Attach signup handler
+      document.getElementById('registerForm').addEventListener('submit', handleSignUp);
+    </script>
     <!--script links-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   </body>
