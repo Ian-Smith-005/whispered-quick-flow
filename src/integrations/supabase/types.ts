@@ -14,7 +14,186 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_insights: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          insight_type: string
+          metadata: Json | null
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          insight_type: string
+          metadata?: Json | null
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          insight_type?: string
+          metadata?: Json | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      glucose_readings: {
+        Row: {
+          created_at: string
+          glucose_value: number
+          id: string
+          notes: string | null
+          reading_context: string | null
+          reading_time: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          glucose_value: number
+          id?: string
+          notes?: string | null
+          reading_context?: string | null
+          reading_time?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          glucose_value?: number
+          id?: string
+          notes?: string | null
+          reading_context?: string | null
+          reading_time?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      meals: {
+        Row: {
+          ai_analyzed: boolean | null
+          calories: number | null
+          carbohydrates: number | null
+          created_at: string
+          description: string | null
+          fat: number | null
+          fiber: number | null
+          id: string
+          image_url: string | null
+          meal_name: string
+          meal_time: string
+          meal_type: string | null
+          protein: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_analyzed?: boolean | null
+          calories?: number | null
+          carbohydrates?: number | null
+          created_at?: string
+          description?: string | null
+          fat?: number | null
+          fiber?: number | null
+          id?: string
+          image_url?: string | null
+          meal_name: string
+          meal_time?: string
+          meal_type?: string | null
+          protein?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_analyzed?: boolean | null
+          calories?: number | null
+          carbohydrates?: number | null
+          created_at?: string
+          description?: string | null
+          fat?: number | null
+          fiber?: number | null
+          id?: string
+          image_url?: string | null
+          meal_name?: string
+          meal_time?: string
+          meal_type?: string | null
+          protein?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          date_of_birth: string | null
+          diabetes_type: string | null
+          diagnosis_date: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date_of_birth?: string | null
+          diabetes_type?: string | null
+          diagnosis_date?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date_of_birth?: string | null
+          diabetes_type?: string | null
+          diagnosis_date?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_metrics: {
+        Row: {
+          created_at: string
+          id: string
+          metric_type: string
+          notes: string | null
+          recorded_at: string
+          updated_at: string
+          user_id: string
+          value: Json
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metric_type: string
+          notes?: string | null
+          recorded_at?: string
+          updated_at?: string
+          user_id: string
+          value: Json
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metric_type?: string
+          notes?: string | null
+          recorded_at?: string
+          updated_at?: string
+          user_id?: string
+          value?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

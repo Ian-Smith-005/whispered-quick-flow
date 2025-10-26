@@ -1,1 +1,7 @@
 project_id = "bkaahxlulailvpszbkfo"
+
+[functions.ai-health-chat]
+verify_jwt = false
+
+[functions.analyze-meal-image]
+verify_jwt = false

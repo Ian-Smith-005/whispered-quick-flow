@@ -460,40 +460,102 @@
           </h4>
           <div class="card shadow-sm mb-5">
             <div class="card-body">
+              <!-- Image Analysis Buttons -->
+              <div class="mb-3 d-flex gap-2">
+                <button type="button" class="btn btn-primary" id="uploadMealImage">
+                  <i class="fas fa-image"></i> Upload Photo
+                </button>
+                <button type="button" class="btn btn-info" id="takeMealPhoto">
+                  <i class="fas fa-camera"></i> Take Photo
+                </button>
+              </div>
+              
+              <!-- Analysis Result Container -->
+              <div id="mealAnalysisResult" class="mb-3" style="display: none;"></div>
+
               <form id="mealForm">
                 <div class="row g-3">
-                  <div class="col-md-3">
-                    <label class="form-label">Meal Time</label>
-                    <select class="form-select" id="mealTime" required>
-                      <option disabled selected>Select</option>
-                      <option>Breakfast</option>
-                      <option>Lunch</option>
-                      <option>Dinner</option>
-                      <option>Snack</option>
-                    </select>
-                  </div>
-                  <div class="col-md-5">
-                    <label class="form-label">Meal Description</label>
+                  <div class="col-md-6">
+                    <label class="form-label">Meal Name</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="mealDesc"
-                      placeholder="e.g. Brown rice & grilled chicken"
+                      name="mealName"
+                      placeholder="e.g. Chicken Salad"
                       required
                     />
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-3">
+                    <label class="form-label">Meal Type</label>
+                    <select class="form-select" name="mealType" required>
+                      <option value="" disabled selected>Select</option>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="snack">Snack</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
                     <label class="form-label">Calories</label>
                     <input
                       type="number"
                       class="form-control"
-                      id="mealCalories"
+                      name="calories"
                       placeholder="e.g. 350"
                     />
                   </div>
-                  <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-success w-100">
-                      <i class="fas fa-check"></i> Add
+                  <div class="col-md-12">
+                    <label class="form-label">Description</label>
+                    <textarea
+                      class="form-control"
+                      name="description"
+                      rows="2"
+                      placeholder="Optional: Describe your meal..."
+                    ></textarea>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Carbs (g)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      name="carbs"
+                      placeholder="e.g. 45"
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Protein (g)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      name="protein"
+                      placeholder="e.g. 25"
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Fat (g)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      name="fat"
+                      placeholder="e.g. 15"
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Fiber (g)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      class="form-control"
+                      name="fiber"
+                      placeholder="e.g. 5"
+                    />
+                  </div>
+                  <div class="col-md-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success">
+                      <i class="fas fa-check"></i> Log Meal
                     </button>
                   </div>
                 </div>
@@ -503,23 +565,26 @@
 
           <!-- Meal History -->
           <h4 class="section-title">
-            <i class="fas fa-history me-2"></i>Today's Tracked Meals
+            <i class="fas fa-history me-2"></i>Recent Meals
           </h4>
           <div class="card shadow-sm mb-5">
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-striped table-hover" id="mealTable">
+                <table class="table table-striped table-hover">
                   <thead>
                     <tr>
                       <th>Time</th>
-                      <th>Description</th>
+                      <th>Meal Name</th>
+                      <th>Type</th>
                       <th>Calories</th>
-                      <th>Health Analysis</th>
-                      <th>Action</th>
+                      <th>Carbs (g)</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <!-- Meal rows will go here -->
+                  <tbody id="mealsTableBody">
+                    <tr>
+                      <td colspan="6" class="text-center">Loading meals...</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -927,9 +992,171 @@
     <script src="assets/js/auth.js"></script>
     <script src="assets/js/session-check.js"></script>
     <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/ai.js"></script>
     <script src="assets/js/account_deletion.js"></script>
     <script src="assets/js/graph_js/dashboard_user_graph.js"></script>
+    
+    <!-- New backend integration scripts -->
+    <script type="module">
+      import { initializeChat } from './assets/js/ai-chat.js';
+      import { initializeMealImageAnalysis } from './assets/js/meal-image-analysis.js';
+      import { 
+        addMeal, 
+        getMeals, 
+        addGlucoseReading, 
+        getGlucoseReadings,
+        addUserMetric,
+        getUserMetrics,
+        updateUserProfile,
+        getUserProfile 
+      } from './assets/js/dashboard-data.js';
+
+      // Initialize when DOM is ready
+      document.addEventListener('DOMContentLoaded', () => {
+        initializeChat();
+        initializeMealImageAnalysis();
+        loadDashboardData();
+        setupForms();
+      });
+
+      // Load dashboard data
+      async function loadDashboardData() {
+        try {
+          // Load recent meals
+          const mealsResult = await getMeals(10);
+          if (mealsResult.success) {
+            displayRecentMeals(mealsResult.data);
+          }
+
+          // Load recent glucose readings
+          const glucoseResult = await getGlucoseReadings(10);
+          if (glucoseResult.success) {
+            displayGlucoseStats(glucoseResult.data);
+          }
+
+          // Load user profile
+          const profileResult = await getUserProfile();
+          if (profileResult.success && profileResult.data) {
+            displayUserProfile(profileResult.data);
+          }
+        } catch (error) {
+          console.error('Error loading dashboard data:', error);
+        }
+      }
+
+      // Setup form handlers
+      function setupForms() {
+        // Meal logging form
+        const mealForm = document.querySelector('#mealplans form');
+        if (mealForm) {
+          mealForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            const result = await addMeal({
+              name: formData.get('mealName'),
+              type: formData.get('mealType'),
+              description: formData.get('description'),
+              calories: parseFloat(formData.get('calories')) || null,
+              carbs: parseFloat(formData.get('carbs')) || null,
+              protein: parseFloat(formData.get('protein')) || null,
+              fat: parseFloat(formData.get('fat')) || null,
+              fiber: parseFloat(formData.get('fiber')) || null,
+            });
+
+            if (result.success) {
+              e.target.reset();
+              alert('Meal logged successfully!');
+              loadDashboardData();
+            } else {
+              alert('Error logging meal: ' + result.error);
+            }
+          });
+        }
+
+        // Glucose logging (quick add button)
+        const glucoseBtn = document.getElementById('quickAddGlucose');
+        if (glucoseBtn) {
+          glucoseBtn.addEventListener('click', async () => {
+            const value = prompt('Enter glucose value (mg/dL):');
+            const context = prompt('Context (fasting/before_meal/after_meal/bedtime/random):');
+            
+            if (value && context) {
+              const result = await addGlucoseReading({
+                value: parseFloat(value),
+                context: context
+              });
+
+              if (result.success) {
+                alert('Glucose reading added!');
+                loadDashboardData();
+              } else {
+                alert('Error: ' + result.error);
+              }
+            }
+          });
+        }
+      }
+
+      // Display functions
+      function displayRecentMeals(meals) {
+        const container = document.getElementById('recentMealsList');
+        if (!container) return;
+
+        if (meals.length === 0) {
+          container.innerHTML = '<p class="text-muted">No meals logged yet</p>';
+          return;
+        }
+
+        container.innerHTML = meals.slice(0, 5).map(meal => `
+          <div class="meal-item mb-2 p-2 border-bottom">
+            <strong>${meal.meal_name}</strong> - ${meal.meal_type || 'N/A'}
+            <br>
+            <small class="text-muted">${new Date(meal.meal_time).toLocaleDateString()}</small>
+            ${meal.calories ? `<br><small>${meal.calories} cal, ${meal.carbohydrates || 0}g carbs</small>` : ''}
+          </div>
+        `).join('');
+      }
+
+      function displayGlucoseStats(readings) {
+        if (readings.length === 0) return;
+
+        const values = readings.map(r => r.glucose_value);
+        const avg = (values.reduce((a, b) => a + b, 0) / values.length).toFixed(1);
+        const latest = values[0];
+
+        const avgElement = document.getElementById('avgGlucose');
+        const latestElement = document.getElementById('latestGlucose');
+
+        if (avgElement) avgElement.textContent = avg + ' mg/dL';
+        if (latestElement) latestElement.textContent = latest + ' mg/dL';
+      }
+
+      function displayUserProfile(profile) {
+        const nameElement = document.getElementById('profileFullName');
+        const diabetesTypeElement = document.getElementById('profileDiabetesType');
+
+        if (nameElement && profile.full_name) {
+          nameElement.textContent = profile.full_name;
+        }
+        if (diabetesTypeElement && profile.diabetes_type) {
+          diabetesTypeElement.textContent = profile.diabetes_type.charAt(0).toUpperCase() + profile.diabetes_type.slice(1);
+        }
+      }
+
+      // Make functions globally available
+      window.dashboardFunctions = {
+        addMeal,
+        getMeals,
+        addGlucoseReading,
+        getGlucoseReadings,
+        addUserMetric,
+        getUserMetrics,
+        updateUserProfile,
+        getUserProfile,
+        loadDashboardData
+      };
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
