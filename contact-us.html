@@ -385,28 +385,9 @@
 
     <!--Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/landing.js"></script>
+    <script type="module" src="assets/js/landing-dynamic.js"></script>
+    <script type="module" src="assets/js/contact-form.js"></script>
     <script src="assets/js/bubble__bg.js"></script>
     <script src="assets/js/preloader.js"></script>
-
-    <script>
-      // Contact form submission
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
-        
-        // In a real application, you would send this data to a server
-        alert(`Thank you, ${firstName}! Your message has been sent. We'll get back to you at ${email} within 24 hours.`);
-        
-        // Reset form
-        this.reset();
-      });
-    </script>
   </body>
 </html>

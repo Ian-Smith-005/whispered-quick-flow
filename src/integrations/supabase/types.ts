@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      activities: {
+        Row: {
+          activity_date: string
+          activity_type: string
+          calories_burned: number | null
+          created_at: string
+          duration_minutes: number | null
+          id: string
+          notes: string | null
+          steps: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activity_date?: string
+          activity_type: string
+          calories_burned?: number | null
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          notes?: string | null
+          steps?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activity_date?: string
+          activity_type?: string
+          calories_burned?: number | null
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          notes?: string | null
+          steps?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       ai_insights: {
         Row: {
           content: string
@@ -38,6 +77,63 @@ export type Database = {
           insight_type?: string
           metadata?: Json | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      chat_history: {
+        Row: {
+          created_at: string
+          id: string
+          is_user: boolean
+          message: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_user?: boolean
+          message: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_user?: boolean
+          message?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contacts: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          message: string
+          status: string | null
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          message: string
+          status?: string | null
+          subject: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          message?: string
+          status?: string | null
+          subject?: string
         }
         Relationships: []
       }
@@ -69,6 +165,75 @@ export type Database = {
           notes?: string | null
           reading_context?: string | null
           reading_time?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      health_reports: {
+        Row: {
+          end_date: string
+          generated_at: string
+          id: string
+          metrics: Json
+          period: string
+          report_type: string
+          start_date: string
+          user_id: string
+        }
+        Insert: {
+          end_date: string
+          generated_at?: string
+          id?: string
+          metrics?: Json
+          period: string
+          report_type: string
+          start_date: string
+          user_id: string
+        }
+        Update: {
+          end_date?: string
+          generated_at?: string
+          id?: string
+          metrics?: Json
+          period?: string
+          report_type?: string
+          start_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      meal_plans: {
+        Row: {
+          created_at: string
+          duration_days: number | null
+          id: string
+          plan_name: string
+          plan_type: string | null
+          status: string | null
+          suggestions: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_days?: number | null
+          id?: string
+          plan_name: string
+          plan_type?: string | null
+          status?: string | null
+          suggestions?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_days?: number | null
+          id?: string
+          plan_name?: string
+          plan_type?: string | null
+          status?: string | null
+          suggestions?: Json
           updated_at?: string
           user_id?: string
         }
@@ -128,6 +293,48 @@ export type Database = {
         }
         Relationships: []
       }
+      medications: {
+        Row: {
+          created_at: string
+          dosage: string
+          end_date: string | null
+          frequency: string | null
+          id: string
+          name: string
+          notes: string | null
+          reminder_times: Json | null
+          start_date: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          dosage: string
+          end_date?: string | null
+          frequency?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          reminder_times?: Json | null
+          start_date?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          dosage?: string
+          end_date?: string | null
+          frequency?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          reminder_times?: Json | null
+          start_date?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -158,6 +365,54 @@ export type Database = {
           id?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          email: string
+          id: string
+          subscribed_at: string
+        }
+        Insert: {
+          email: string
+          id?: string
+          subscribed_at?: string
+        }
+        Update: {
+          email?: string
+          id?: string
+          subscribed_at?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_featured: boolean | null
+          name: string
+          rating: number | null
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_featured?: boolean | null
+          name: string
+          rating?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_featured?: boolean | null
+          name?: string
+          rating?: number | null
+          user_id?: string | null
         }
         Relationships: []
       }
