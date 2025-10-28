@@ -28,7 +28,7 @@
       type="image/x-icon"
     />
 
-    <!-- Remix Icons (only include once) -->
+    <!-- Remix Icons -->
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -108,7 +108,7 @@
               <input type="checkbox" id="remember" name="remember" />
               <label for="remember">Remember me</label>
             </div>
-            <a href="#" class="forgot-password">Forgot Password?</a>
+            <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot Password?</a>
           </div>
           <button type="submit" class="btn btn-primary">Sign In</button>
           <div class="other-login">or</div>
@@ -122,9 +122,8 @@
     </div>
 
     <!--script links-->
-    <script src="assets/js/bubble__bg.js"></script>
+    <script type="module" src="assets/js/auth-page-init.js"></script>
     <script src="assets/js/form__passcode__toggler.js"></script>
-    <script src="assets/js/preloader.js"></script>
     <script src="assets/js/auth.js"></script>
     <script>
       // Check if already authenticated

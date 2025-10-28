@@ -264,7 +264,46 @@ function initAuthListener() {
   });
 }
 
+// Handle forgot password
+async function handleForgotPassword(event) {
+  event.preventDefault();
+  
+  const email = prompt('Please enter your email address:');
+  
+  if (!email) {
+    return;
+  }
+  
+  if (!isValidEmail(email)) {
+    alert('Please enter a valid email address');
+    return;
+  }
+  
+  try {
+    const redirectUrl = `${window.location.origin}/login.html`;
+    
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectUrl
+    });
+    
+    if (error) {
+      throw error;
+    }
+    
+    alert('Password reset email sent! Please check your inbox.');
+  } catch (error) {
+    console.error('Password reset error:', error);
+    alert(error.message || 'Failed to send reset email. Please try again.');
+  }
+}
+
 // Initialize auth on page load
 document.addEventListener('DOMContentLoaded', () => {
   initAuthListener();
+  
+  // Attach forgot password handler if link exists
+  const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+  if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', handleForgotPassword);
+  }
 });
