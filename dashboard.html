@@ -999,6 +999,8 @@
     <script type="module">
       import { initializeChat } from './assets/js/ai-chat.js';
       import { initializeMealImageAnalysis } from './assets/js/meal-image-analysis.js';
+      import { loadDailyTips } from './assets/js/tips-loader.js';
+      import { loadProfileAnalysis } from './assets/js/profile-loader.js';
       import { 
         addMeal, 
         getMeals, 
@@ -1016,6 +1018,18 @@
         initializeMealImageAnalysis();
         loadDashboardData();
         setupForms();
+        
+        // Load AI content when sections are viewed
+        const tipsSection = document.getElementById('tips');
+        const profileSection = document.getElementById('profile');
+        
+        // Check if already on tips or profile section
+        if (tipsSection && tipsSection.classList.contains('active')) {
+          loadDailyTips();
+        }
+        if (profileSection && profileSection.classList.contains('active')) {
+          loadProfileAnalysis();
+        }
       });
 
       // Load dashboard data

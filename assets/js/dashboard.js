@@ -63,6 +63,16 @@ async function loadSectionData(sectionId) {
     case 'analysis':
       if (window.initializeMealImageAnalysis) window.initializeMealImageAnalysis();
       break;
+    case 'tips':
+      import('./tips-loader.js').then(module => {
+        module.loadDailyTips();
+      }).catch(err => console.error('Failed to load tips:', err));
+      break;
+    case 'profile':
+      import('./profile-loader.js').then(module => {
+        module.loadProfileAnalysis();
+      }).catch(err => console.error('Failed to load profile:', err));
+      break;
     case 'reports':
       if (window.loadReports) window.loadReports();
       break;

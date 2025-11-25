@@ -1,5 +1,6 @@
 // Meal image analysis using AI
 import { supabase } from '../../src/integrations/supabase/client.js';
+import { formatMealAnalysis } from './ai-response-formatter.js';
 
 const ANALYZE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-meal-image`;
 
@@ -97,56 +98,7 @@ async function analyzeMealImage(file) {
 }
 
 function displayAnalysisResult(analysis, container) {
-  const glycemicColor = {
-    'low': 'success',
-    'medium': 'warning',
-    'high': 'danger'
-  }[analysis.glycemicImpact] || 'info';
-
-  container.innerHTML = `
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          <i class="fas fa-utensils"></i> ${analysis.mealName || 'Meal Analysis'}
-        </h5>
-        
-        <div class="mb-3">
-          <h6>Identified Foods:</h6>
-          <p>${analysis.foods?.join(', ') || 'N/A'}</p>
-        </div>
-
-        <div class="mb-3">
-          <h6>Portion Sizes:</h6>
-          <p>${analysis.portionSizes || 'N/A'}</p>
-        </div>
-
-        <div class="mb-3">
-          <h6>Nutritional Breakdown:</h6>
-          <ul class="list-unstyled">
-            <li><strong>Calories:</strong> ${analysis.nutrition?.calories || 0} kcal</li>
-            <li><strong>Carbohydrates:</strong> ${analysis.nutrition?.carbohydrates || 0}g</li>
-            <li><strong>Protein:</strong> ${analysis.nutrition?.protein || 0}g</li>
-            <li><strong>Fat:</strong> ${analysis.nutrition?.fat || 0}g</li>
-            <li><strong>Fiber:</strong> ${analysis.nutrition?.fiber || 0}g</li>
-          </ul>
-        </div>
-
-        <div class="mb-3">
-          <h6>Glycemic Impact:</h6>
-          <span class="badge bg-${glycemicColor}">${analysis.glycemicImpact?.toUpperCase() || 'UNKNOWN'}</span>
-        </div>
-
-        <div class="mb-3">
-          <h6>Recommendations:</h6>
-          <p>${analysis.recommendations || 'N/A'}</p>
-        </div>
-
-        <div class="alert alert-success">
-          <i class="fas fa-check-circle"></i> Meal saved to your history!
-        </div>
-      </div>
-    </div>
-  `;
+  container.innerHTML = formatMealAnalysis(analysis);
 }
 
 function fileToBase64(file) {
