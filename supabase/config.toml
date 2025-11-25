@@ -5,3 +5,13 @@ verify_jwt = false
 
 [functions.analyze-meal-image]
 verify_jwt = false
+
+[functions.transcribe-audio]
+verify_jwt = false
+
+[functions.generate-daily-tips]
+verify_jwt = false
+
+[functions.generate-profile-analysis]
+verify_jwt = false
+

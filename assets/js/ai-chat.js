@@ -1,5 +1,7 @@
 // AI Chat functionality using Lovable AI Gateway
 import { supabase } from '../../src/integrations/supabase/client.js';
+import { formatAIResponse } from './ai-response-formatter.js';
+import { VoiceRecorder } from './voice-recorder.js';
 
 let conversationHistory = [];
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-health-chat`;
@@ -10,6 +12,10 @@ export function initializeChat() {
   const chatInput = document.getElementById('chatInput');
   const chatMessages = document.getElementById('chatMessages');
   const clearChatBtn = document.getElementById('clearChat');
+  const plusBtn = document.getElementById('plusBtn');
+  const uploadMenu = document.getElementById('uploadMenu');
+  const voiceBtn = document.querySelector('.voice-btn');
+  const imageInput = document.getElementById('imageInput');
 
   if (!chatForm || !chatInput || !chatMessages) {
     console.error('Chat elements not found');
@@ -37,6 +43,160 @@ export function initializeChat() {
       renderChatMessages();
     });
   }
+
+  // Handle attach button (plus button)
+  if (plusBtn && uploadMenu) {
+    plusBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      uploadMenu.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!uploadMenu.contains(e.target) && e.target !== plusBtn) {
+        uploadMenu.classList.remove('show');
+      }
+    });
+
+    // Handle file upload options
+    const uploadFileBtn = document.getElementById('uploadFileBtn');
+    const takePhotoBtn = document.getElementById('takePhotoBtn');
+
+    if (uploadFileBtn && imageInput) {
+      uploadFileBtn.addEventListener('click', () => {
+        imageInput.removeAttribute('capture');
+        imageInput.click();
+        uploadMenu.classList.remove('show');
+      });
+    }
+
+    if (takePhotoBtn && imageInput) {
+      takePhotoBtn.addEventListener('click', () => {
+        imageInput.setAttribute('capture', 'environment');
+        imageInput.click();
+        uploadMenu.classList.remove('show');
+      });
+    }
+
+    // Handle image selection
+    if (imageInput) {
+      imageInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        await handleImageUpload(file);
+        imageInput.value = '';
+      });
+    }
+  }
+
+  // Handle voice recording
+  if (voiceBtn) {
+    let voiceRecorder = null;
+    let isRecording = false;
+
+    voiceBtn.addEventListener('click', async () => {
+      if (!isRecording) {
+        // Start recording
+        voiceRecorder = new VoiceRecorder(
+          (transcript) => {
+            chatInput.value = transcript;
+            isRecording = false;
+            voiceBtn.innerHTML = '<i class="fa-solid fa-microphone-lines"></i> Voice';
+            voiceBtn.classList.remove('recording');
+          },
+          (error) => {
+            alert(error);
+            isRecording = false;
+            voiceBtn.innerHTML = '<i class="fa-solid fa-microphone-lines"></i> Voice';
+            voiceBtn.classList.remove('recording');
+          }
+        );
+        
+        await voiceRecorder.startRecording();
+        isRecording = true;
+        voiceBtn.innerHTML = '<i class="fa-solid fa-stop"></i> Stop';
+        voiceBtn.classList.add('recording');
+      } else {
+        // Stop recording
+        voiceRecorder.stopRecording();
+        isRecording = false;
+        voiceBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+      }
+    });
+  }
+}
+
+// Handle image upload for analysis
+async function handleImageUpload(file) {
+  const chatMessages = document.getElementById('chatMessages');
+  
+  try {
+    // Show uploading message
+    const userDiv = document.createElement('div');
+    userDiv.className = 'message user-message';
+    userDiv.innerHTML = '<p><i class="fas fa-image me-2"></i>Analyzing uploaded image...</p>';
+    chatMessages.appendChild(userDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Convert to base64
+    const base64Image = await fileToBase64(file);
+
+    // Get session
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      throw new Error('Not authenticated');
+    }
+
+    // Call meal analysis endpoint
+    const ANALYZE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-meal-image`;
+    const response = await fetch(ANALYZE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({ imageBase64: base64Image }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Image analysis failed');
+    }
+
+    const result = await response.json();
+    
+    // Show analysis result
+    userDiv.remove();
+    const resultDiv = document.createElement('div');
+    resultDiv.className = 'message bot-message';
+    resultDiv.innerHTML = `
+      <div class="mb-2"><strong>📸 Image Analysis Result:</strong></div>
+      <div style="font-size: 0.9rem;">
+        <strong>${result.analysis.mealName || 'Meal Detected'}</strong><br>
+        <em>Calories:</em> ${result.analysis.nutrition?.calories || 'N/A'} kcal<br>
+        <em>Carbs:</em> ${result.analysis.nutrition?.carbohydrates || 'N/A'}g<br>
+        <em>Glycemic Impact:</em> <span class="badge bg-${result.analysis.glycemicImpact === 'low' ? 'success' : result.analysis.glycemicImpact === 'high' ? 'danger' : 'warning'}">${result.analysis.glycemicImpact || 'Unknown'}</span>
+      </div>
+    `;
+    chatMessages.appendChild(resultDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  } catch (error) {
+    console.error('Image upload error:', error);
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'message bot-message error';
+    errorDiv.innerHTML = `<p>Sorry, I couldn't analyze that image: ${error.message}</p>`;
+    chatMessages.appendChild(errorDiv);
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 // Send message to AI
@@ -79,10 +239,10 @@ async function sendMessage(messageText) {
           loadingDiv.remove();
           assistantDiv = document.createElement('div');
           assistantDiv.className = 'message bot-message';
-          assistantDiv.innerHTML = `<p>${assistantMessage}</p>`;
+          assistantDiv.innerHTML = formatAIResponse(assistantMessage);
           chatMessages.appendChild(assistantDiv);
         } else {
-          assistantDiv.querySelector('p').textContent = assistantMessage;
+          assistantDiv.innerHTML = formatAIResponse(assistantMessage);
         }
         
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -192,7 +352,11 @@ function renderChatMessages() {
   conversationHistory.forEach(msg => {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${msg.role === 'user' ? 'user-message' : 'bot-message'}`;
-    messageDiv.innerHTML = `<p>${msg.content}</p>`;
+    if (msg.role === 'assistant') {
+      messageDiv.innerHTML = formatAIResponse(msg.content);
+    } else {
+      messageDiv.innerHTML = `<p>${msg.content}</p>`;
+    }
     chatMessages.appendChild(messageDiv);
   });
 

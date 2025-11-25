@@ -206,7 +206,7 @@ body {
   height: 40px;
   padding: 0 16px;
   border: 1px solid black;
-  border-radius: 999px; /* <-- smooth, pill-shaped */
+  border-radius: 999px;
   cursor: pointer;
   transition: all 0.3s ease;
   background-color: #fff;
@@ -225,6 +225,17 @@ body {
 
 .voice-btn {
   right: 10px;
+}
+
+.voice-btn.recording {
+  color: #dc3545;
+  animation: pulse 1.5s infinite;
+  background-color: #fee;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .plus-btn:hover,
