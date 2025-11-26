@@ -1,5 +1,5 @@
 // Dynamic data loading for landing pages
-import { supabase } from '/src/integrations/supabase/client.ts';
+import { supabase } from '../../src/integrations/supabase/client.js';
 
 // Preloader functionality
 function initPreloader() {

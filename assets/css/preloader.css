@@ -11,6 +11,17 @@
         justify-content: center;
         z-index: 9999;
         transition: opacity 1s ease;
+        animation: auto-hide 5s forwards;
+      }
+      
+      @keyframes auto-hide {
+        0%, 99% { 
+          opacity: 1; 
+        }
+        100% { 
+          opacity: 0; 
+          pointer-events: none;
+        }
       }
 
       .preloader-overlay.fade-out {
