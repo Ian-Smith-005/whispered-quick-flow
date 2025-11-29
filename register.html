@@ -124,46 +124,39 @@
 
     <!--script links-->
     <script src="assets/js/form__passcode__toggler.js"></script>
-    <script src="assets/js/auth.js" defer></script>
+    <script src="assets/js/auth.js"></script>
     <script type="module" src="assets/js/auth-page-init.js"></script>
     <script>
-      // Attach handler as soon as script loads
+      // Clear URL parameters immediately to prevent password exposure
+      if (window.location.search) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      
+      // Attach handler after auth.js loads
       (function() {
-        function attachRegisterHandler() {
-          console.log('Attempting to attach register handler...');
-          const registerForm = document.getElementById('registerForm');
-          
-          if (!registerForm) {
-            console.error('Register form not found!');
-            return;
-          }
-          
-          if (typeof handleSignUp !== 'function') {
-            console.error('handleSignUp function not found! Retrying...');
-            setTimeout(attachRegisterHandler, 100);
-            return;
-          }
-          
-          registerForm.addEventListener('submit', function(e) {
-            console.log('Form submit intercepted');
-            e.preventDefault();
-            e.stopPropagation();
-            handleSignUp(e);
-          });
-          
-          console.log('✓ Register handler attached successfully');
-          
-          // Check auth after handler is attached
-          if (typeof redirectIfAuthenticated === 'function') {
-            redirectIfAuthenticated();
-          }
+        const registerForm = document.getElementById('registerForm');
+        
+        if (!registerForm) {
+          console.error('Register form not found!');
+          return;
         }
         
-        // Try to attach immediately and on DOM load
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', attachRegisterHandler);
-        } else {
-          attachRegisterHandler();
+        if (typeof handleSignUp !== 'function') {
+          console.error('handleSignUp not loaded yet!');
+          return;
+        }
+        
+        registerForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          handleSignUp(e);
+        });
+        
+        console.log('✓ Register handler attached');
+        
+        // Check if already authenticated
+        if (typeof redirectIfAuthenticated === 'function') {
+          redirectIfAuthenticated();
         }
       })();
     </script>

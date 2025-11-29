@@ -123,46 +123,39 @@
 
     <!--script links-->
     <script src="assets/js/form__passcode__toggler.js"></script>
-    <script src="assets/js/auth.js" defer></script>
+    <script src="assets/js/auth.js"></script>
     <script type="module" src="assets/js/auth-page-init.js"></script>
     <script>
-      // Attach handler as soon as script loads
+      // Clear URL parameters immediately to prevent password exposure
+      if (window.location.search) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+      
+      // Attach handler after auth.js loads
       (function() {
-        function attachLoginHandler() {
-          console.log('Attempting to attach login handler...');
-          const loginForm = document.getElementById('loginForm');
-          
-          if (!loginForm) {
-            console.error('Login form not found!');
-            return;
-          }
-          
-          if (typeof handleLogin !== 'function') {
-            console.error('handleLogin function not found! Retrying...');
-            setTimeout(attachLoginHandler, 100);
-            return;
-          }
-          
-          loginForm.addEventListener('submit', function(e) {
-            console.log('Form submit intercepted');
-            e.preventDefault();
-            e.stopPropagation();
-            handleLogin(e);
-          });
-          
-          console.log('✓ Login handler attached successfully');
-          
-          // Check auth after handler is attached
-          if (typeof redirectIfAuthenticated === 'function') {
-            redirectIfAuthenticated();
-          }
+        const loginForm = document.getElementById('loginForm');
+        
+        if (!loginForm) {
+          console.error('Login form not found!');
+          return;
         }
         
-        // Try to attach immediately and on DOM load
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', attachLoginHandler);
-        } else {
-          attachLoginHandler();
+        if (typeof handleLogin !== 'function') {
+          console.error('handleLogin not loaded yet!');
+          return;
+        }
+        
+        loginForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          handleLogin(e);
+        });
+        
+        console.log('✓ Login handler attached');
+        
+        // Check if already authenticated
+        if (typeof redirectIfAuthenticated === 'function') {
+          redirectIfAuthenticated();
         }
       })();
     </script>
