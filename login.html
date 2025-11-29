@@ -126,11 +126,17 @@
     <script src="assets/js/form__passcode__toggler.js"></script>
     <script src="assets/js/auth.js"></script>
     <script>
-      // Check if already authenticated
-      redirectIfAuthenticated();
-      
-      // Attach login handler
-      document.getElementById('loginForm').addEventListener('submit', handleLogin);
+      // Wait for DOM and auth.js to load before attaching handlers
+      document.addEventListener('DOMContentLoaded', function() {
+        // Check if already authenticated
+        redirectIfAuthenticated();
+        
+        // Attach login handler
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+          loginForm.addEventListener('submit', handleLogin);
+        }
+      });
     </script>
     <!--script links-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
