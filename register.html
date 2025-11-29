@@ -87,7 +87,7 @@
         <div class="circle circle-2"></div>
       </div>
       <div class="form-section">
-        <form id="registerForm" class="w-100" novalidate onsubmit="return false;">
+        <form id="registerForm" class="w-100" novalidate>
           <h2>Sign Up</h2>
           <div class="form-group">
             <label for="firstName">First Name</label>
@@ -123,33 +123,49 @@
     </div>
 
     <!--script links-->
-    <script type="module" src="assets/js/auth-page-init.js"></script>
     <script src="assets/js/form__passcode__toggler.js"></script>
-    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/auth.js" defer></script>
+    <script type="module" src="assets/js/auth-page-init.js"></script>
     <script>
-      // Immediately attach handler to prevent form submission
-      window.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded, attaching register handler...');
-        
-        // Check if already authenticated
-        if (typeof redirectIfAuthenticated === 'function') {
-          redirectIfAuthenticated();
-        }
-        
-        // Attach signup handler
-        const registerForm = document.getElementById('registerForm');
-        if (registerForm && typeof handleSignUp === 'function') {
-          registerForm.onsubmit = function(e) {
+      // Attach handler as soon as script loads
+      (function() {
+        function attachRegisterHandler() {
+          console.log('Attempting to attach register handler...');
+          const registerForm = document.getElementById('registerForm');
+          
+          if (!registerForm) {
+            console.error('Register form not found!');
+            return;
+          }
+          
+          if (typeof handleSignUp !== 'function') {
+            console.error('handleSignUp function not found! Retrying...');
+            setTimeout(attachRegisterHandler, 100);
+            return;
+          }
+          
+          registerForm.addEventListener('submit', function(e) {
+            console.log('Form submit intercepted');
             e.preventDefault();
             e.stopPropagation();
             handleSignUp(e);
-            return false;
-          };
-          console.log('Register handler attached successfully');
-        } else {
-          console.error('Form or handler not found');
+          });
+          
+          console.log('✓ Register handler attached successfully');
+          
+          // Check auth after handler is attached
+          if (typeof redirectIfAuthenticated === 'function') {
+            redirectIfAuthenticated();
+          }
         }
-      });
+        
+        // Try to attach immediately and on DOM load
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', attachRegisterHandler);
+        } else {
+          attachRegisterHandler();
+        }
+      })();
     </script>
     <!--script links-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
