@@ -87,7 +87,7 @@
         <div class="circle circle-2"></div>
       </div>
       <div class="form-section">
-        <form id="registerForm" class="w-100" novalidate>
+        <form id="registerForm" class="w-100" novalidate onsubmit="return false;">
           <h2>Sign Up</h2>
           <div class="form-group">
             <label for="firstName">First Name</label>
@@ -127,15 +127,27 @@
     <script src="assets/js/form__passcode__toggler.js"></script>
     <script src="assets/js/auth.js"></script>
     <script>
-      // Wait for DOM and auth.js to load before attaching handlers
-      document.addEventListener('DOMContentLoaded', function() {
+      // Immediately attach handler to prevent form submission
+      window.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, attaching register handler...');
+        
         // Check if already authenticated
-        redirectIfAuthenticated();
+        if (typeof redirectIfAuthenticated === 'function') {
+          redirectIfAuthenticated();
+        }
         
         // Attach signup handler
         const registerForm = document.getElementById('registerForm');
-        if (registerForm) {
-          registerForm.addEventListener('submit', handleSignUp);
+        if (registerForm && typeof handleSignUp === 'function') {
+          registerForm.onsubmit = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            handleSignUp(e);
+            return false;
+          };
+          console.log('Register handler attached successfully');
+        } else {
+          console.error('Form or handler not found');
         }
       });
     </script>
