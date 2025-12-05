@@ -7,31 +7,45 @@ const ANALYZE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/analyze-m
 export function initializeMealImageAnalysis() {
   const uploadBtn = document.getElementById('uploadMealImage');
   const cameraBtn = document.getElementById('takeMealPhoto');
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = 'image/*';
-  fileInput.style.display = 'none';
-  document.body.appendChild(fileInput);
+  
+  // Create separate inputs for upload and camera
+  const uploadInput = document.createElement('input');
+  uploadInput.type = 'file';
+  uploadInput.accept = 'image/*';
+  uploadInput.style.display = 'none';
+  document.body.appendChild(uploadInput);
+
+  const cameraInput = document.createElement('input');
+  cameraInput.type = 'file';
+  cameraInput.accept = 'image/*';
+  cameraInput.setAttribute('capture', 'environment'); // Use back camera
+  cameraInput.style.display = 'none';
+  document.body.appendChild(cameraInput);
 
   if (uploadBtn) {
     uploadBtn.addEventListener('click', () => {
-      fileInput.click();
+      uploadInput.click();
     });
   }
 
   if (cameraBtn) {
     cameraBtn.addEventListener('click', () => {
-      fileInput.setAttribute('capture', 'environment');
-      fileInput.click();
+      cameraInput.click();
     });
   }
 
-  fileInput.addEventListener('change', async (e) => {
+  uploadInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     await analyzeMealImage(file);
-    fileInput.value = ''; // Reset
+    uploadInput.value = '';
+  });
+
+  cameraInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    await analyzeMealImage(file);
+    cameraInput.value = '';
   });
 }
 
